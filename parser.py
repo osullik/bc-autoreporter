@@ -46,7 +46,7 @@ class inputHandler():
 		Output: 
 			returns the contents of the file as a list of form ["<observation1>", "<observation2>"]
 		'''
-		
+
 		observationList = []
 		if self.inputType == "bulk":
 			if self.fileName == None:
@@ -117,7 +117,7 @@ class logEntryParser():
 						targetEntity = likelyCandidate
 
 				if targetEntity == None:
-					targetEntity = candidateList[0]
+					targetEntity = "<UNKNOWN>_"+candidateEntity[0]
 
 
 		return targetEntity
