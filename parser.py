@@ -4,7 +4,8 @@ import nltk
 from nltk.tree import Tree
 from nltk.metrics.distance  import edit_distance
 import datefinder, datetime
-import re
+from string import punctuation
+import json
 
 '''
 nltk.download('averaged_perceptron_tagger')
@@ -25,6 +26,42 @@ nltk.download('words')
 
 # Outputs:
 #	JSON Document to send to elasticsearch
+
+
+class inputHandler():
+	def __init__(self, inputType, fileName=None):
+		self.inputType = inputType
+		self.fileName = fileName
+		self.parser = logEntryParser()
+
+	def bulkImport(self):
+		'''
+		bulk import reads in a text file of observations. 
+		Assumptions: 
+			- Each log is on a new line
+			- the Observations file is in the same directory. 
+		Input (via Object):
+			self.inputType - string - the type of ingest mode
+			self.fileNmae - string - the name of the file to read logs from. 
+		Output: 
+			returns the contents of the file as a list of form ["<observation1>", "<observation2>"]
+		'''
+		
+		observationList = []
+		if self.inputType == "bulk":
+			if self.fileName == None:
+				print("Need to specify Filename")
+			else:
+				with open(self.fileName) as inputLog:
+					observations = inputLog.readlines()
+
+					for observation in observations:
+						if observation.strip():
+							observationList.append(observation)
+				return observationList
+		else: 
+			print("Streaming input not implemented")
+
 
 
 class logEntryParser():
@@ -49,12 +86,14 @@ class logEntryParser():
 
 		targetEntity = None 											# Initialize Vars		
 		stringDistanceTolerance = 3										# User tunable Tolerance in string matching
+		candidateList = []
 
 		naiveTokenization = logEntry.split(' ')							# Tokenize based on whitespace
 
 		for token in naiveTokenization:									# Loop through all tokens
 			if token[0] == "@":											# Identify those starting with @
 				candidateEntity = token[1:]								# Extract the likely entity 
+				candidateList.append(candidateEntity)
 																			#TODO - Early Stopping
 
 				if candidateEntity in namedEntities:					# Check for exact entity matches
@@ -77,6 +116,9 @@ class logEntryParser():
 					if minDist < stringDistanceTolerance:				# Return the closest string with < a threshold of error
 						targetEntity = likelyCandidate
 
+				if targetEntity == None:
+					targetEntity = candidateList[0]
+
 
 		return targetEntity
 
@@ -89,6 +131,7 @@ class logEntryParser():
 		Known Bugs: 
 			1. dateFinder will render 34 Feb 2021 as 21 Feb 2034
 			2. dateFinder does not consistently apply MM/DD/YYYY format (day month confusion)
+			3. dateFinder doesn't do well at finding dates in large text inputs (treated with token-fu belo)
 		InputArgs: 
 			logEntry - String - The text of the log entry 
 			defaultYear - String - the year that will be used if no year is given 
@@ -100,7 +143,6 @@ class logEntryParser():
 			dateToReturn - String - YYYY/MM/DD format
 		'''	
 
-		print(logEntry)
 		dateToReturn = None
 
 		months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", 
@@ -111,8 +153,8 @@ class logEntryParser():
 		matches = list(datefinder.find_dates(logEntry, 					# Extract list of possible dates
 											base_date=defYear))
 		
-		print(matches)
 		formattedMatches = []											# List to hold the string formatted dates
+
 
 		if len(matches) > 0:											# Convert to YYYY/MM/DD formatted string
 		    for date in matches:
@@ -128,45 +170,115 @@ class logEntryParser():
 			for month in months: 										# Search all string for months 
 				if monthIndex == None: 
 					for token in tokens: 
-						if token in months:
-							monthIndex = tokens.index(token)
-							candidateDate+=(token)
-							break
+						for month in months:
+							if token.lower() ==month.lower():			# reduce errors from casing mismatch
+								monthIndex = tokens.index(token)
+								candidateDate+=(token)
+								break
 				else:
 					break
 
-				strippedToken = tokens[monthIndex+1].strip("st") 	#Anchor on the month, check to see if day or year is next
-				strippedToken = strippedToken.strip("nd")
-				strippedToken = strippedToken.strip("rd")
-				strippedToken = strippedToken.strip("th")
-				if (strippedToken).isnumeric():
-					candidateDate+=(" "+tokens[monthIndex+1])
+				
+				if monthIndex != None:									#I.e. if a month is found in the text
 
-				strippedNextToken = tokens[monthIndex+2].strip("st") #Anchor on the month, check to see if day or year is next
-				strippedNextToken = strippedNextToken.strip("nd")
-				strippedNextToken = strippedNextToken.strip("rd")
-				strippedNextToken = strippedNextToken.strip("th")
-				if (strippedNextToken).isnumeric():
-					candidateDate+=(" "+tokens[monthIndex+2])
+					strippedToken = tokens[monthIndex+1].strip("st") 	#Anchor on the month, check to see if day or year is next
+					strippedToken = strippedToken.strip("nd")
+					strippedToken = strippedToken.strip("rd")
+					strippedToken = strippedToken.strip("th")
+					if (strippedToken).isnumeric():
+						candidateDate+=(" "+tokens[monthIndex+1])
 
-				if monthIndex != 0:
-					strippedPriorToken = tokens[monthIndex-1].strip("st") #Anchor on the month, check to see if day or year is next
-					strippedPriorToken = strippedPriorToken.strip("nd")
-					strippedPriorToken = strippedPriorToken.strip("rd")
-					strippedPriorToken = strippedPriorToken.strip("th")
-					if (strippedPriorToken).isnumeric():
-						candidateDate+=(" "+tokens[monthIndex-1])
-					else:
-						pass
+					strippedNextToken = tokens[monthIndex+2].strip("st") #Anchor on the month, check to see if day or year is next
+					strippedNextToken = strippedNextToken.strip("nd")
+					strippedNextToken = strippedNextToken.strip("rd")
+					strippedNextToken = strippedNextToken.strip("th")
+					if (strippedNextToken).isnumeric():
+						candidateDate+=(" "+tokens[monthIndex+2])
 
-			candidateMatch = list(datefinder.find_dates(candidateDate))			# Convert the candidate date into a date object
+					if monthIndex != 0:
+						strippedPriorToken = tokens[monthIndex-1].strip("st") #Anchor on the month, check to see if day or year is next
+						strippedPriorToken = strippedPriorToken.strip("nd")
+						strippedPriorToken = strippedPriorToken.strip("rd")
+						strippedPriorToken = strippedPriorToken.strip("th")
+						if (strippedPriorToken).isnumeric():
+							candidateDate+=(" "+tokens[monthIndex-1])
+						else:
+							pass
 
-			if len(candidateMatch) > 0:											# Convert to YYYY/MM/DD formatted string
+			candidateMatch = list(datefinder.find_dates(candidateDate, 
+														base_date = defYear))	# Convert the candidate date into a date object
+
+			if len(candidateMatch) > 0:	
+													# Convert to YYYY/MM/DD formatted string
 				for date in candidateMatch:
 					formattedMatches.append(date.strftime('%Y/%m/%d'))
 
 				dateToReturn = formattedMatches[0]
+				
+
+			else:																#Handle situation where dates not detected in text or by Month anchoring
+				for token in tokens:
+					matches += list(datefinder.find_dates(token, 				# Extract list of possible dates
+											base_date=defYear))
+				formattedMatches = []											# List to hold the string formatted dates
+				if len(matches) > 0:											# Convert to YYYY/MM/DD formatted string
+				    for date in matches:
+				        formattedMatches.append(date.strftime('%Y/%m/%d'))
+
+				    dateToReturn = formattedMatches[0]							# Return the first date mentioned in the text
+
 
 		return dateToReturn
+
+	def parseTags(self, logEntry):
+		'''
+		ParseTags extracts the #tags from an employee log
+		Input Args:
+			logEntry - string - The emloyee log
+		Actions: 
+			- Naive Tokenization using whitespace delimiter
+			- Look for tokens that start with a #
+			- Append the terms to the list
+		Outputs: 
+			- tagList - list of strings of form ["Tag1", "Tag2"]
+		Assumptions: 
+			- No spaces in tags
+		'''
+		tagList = []
+		naiveTokenization = logEntry.split(' ')							# Tokenize based on whitespace
+
+		for token in naiveTokenization:									# Loop through all tokens
+			token = token.lstrip()
+			if len(token) >0:
+				if token[0] == "#":											# Identify those starting with @
+					candidateEntity = token[1:]								# Extract the likely entity 
+					candidateEntity = candidateEntity.strip("\n")	# Strip newlines and other garbage
+					candidateEntity = candidateEntity.strip(punctuation)	# Strip newlines and other garbage
+
+
+																				#TODO - Early Stopping
+					tagList.append(candidateEntity)
+			else:
+				pass
+
+		return tagList
+
+
+	def convertLogToJSON(self, logEntry, entityList, defaultYear="2021"):
+
+		entity = self.parseEntities(logEntry, entityList)
+		date = self.parseDates(logEntry, defaultYear)
+		tagList = self.parseTags(logEntry)
+
+		dictToJSONify = {}
+
+		dictToJSONify["entity"] = entity
+		dictToJSONify["date"] = date
+		dictToJSONify["tagList"] = tagList
+		dictToJSONify["observation"] = logEntry
+
+		return dictToJSONify
+
+		
 
 

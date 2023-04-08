@@ -1,9 +1,8 @@
 import unittest
+import json
 
 from parser import logEntryParser
-
-class testInputHandling():
-	print("testInputHandling not implemented")
+from parser import inputHandler
 
 class testEntityExtraction(unittest.TestCase):
 
@@ -56,6 +55,7 @@ class testDateExtraction(unittest.TestCase):
 		self.lp_dates = logEntryParser()
 
 	def testSuccessModes(self):
+		dashDate = "2021-02-28"
 		americanDate = "02/28/2021"
 		americanDateShort = "02/28/21"
 		longDate = "February 28th 2021"
@@ -66,8 +66,11 @@ class testDateExtraction(unittest.TestCase):
 		hardTest = "On February 28th 2021, @HomerSimpson was observed to perform to a satisfactory standard. \
 		This was evidenced by his successful completion of a routine safety check on Reactor 4. His actions \
 		show #competence #attentiontodetail #safetyconsciousness."
+		hardTest2 = "On 2021-02-28 @Zutroy was observed to perform to an excellent standard. \
+		This was evidenced by his successful troubleshooting of the reactor's cooling system, which prevented a potential meltdown. \
+		His actions show #technical expertise and #calmness under pressure."
 
-		successList = [americanDate, americanDateShort, longDate, mediumDate, shortNoYear, longNoYear, longNoYear2, hardTest]
+		successList = [dashDate, americanDate, americanDateShort, longDate, mediumDate, shortNoYear, longNoYear, longNoYear2, hardTest, hardTest2]
 
 		for test in successList:
 			self.assertEqual(self.lp_dates.parseDates(test, "2021"), "2021/02/28")
@@ -96,12 +99,95 @@ class testDateExtraction(unittest.TestCase):
 		for test in notExistList:
 			self.assertNotEqual(self.lp_dates.parseDates(test, "2021"), "2021/02/34")
 
+class testTagExtraction(unittest.TestCase):
+	
 
-class testTagExtraction():
-	print("testTagExtraction not implemented")
+	def setUp(self):
+		self.lp_tags = logEntryParser()
+
+	def testSuccessModes(self):
+		singleTag = "#Test1"
+		singleTagNoisy = "Return #Test1"
+		singleTagHard = hardTest = "On January 15th, 2021, @HomerSimpson was observed to perform to a \
+		satisfactory standard. This was evidenced by his successful completion of a \
+		routine safety check on Reactor 4. His actions show #competence"
+
+		multiTag = "#Test1, #Test2"
+		multiTagContiguous = "Return #Test1 #Test2"
+		multiTagNonContiguous = "Return #Test1 and then also #Test2"
+		multiTagHard = "On January 15th, 2021, @HomerSimpson was observed to perform to a \
+		satisfactory standard. This was evidenced by his successful completion of a \
+		routine safety check on Reactor 4. His actions show #competence #attentiontodetail \
+		#safetyconsciousness."
+
+		successListSingle = [singleTag, singleTagNoisy]
+
+		successListMulti = [multiTag, multiTagContiguous, multiTagNonContiguous]
+
+
+		for test in successListSingle:
+			self.assertEqual(self.lp_tags.parseTags(test), ["Test1"])
+		self.assertEqual(self.lp_tags.parseTags(singleTagHard), ["competence"])
+
+		for test in successListMulti:
+			self.assertEqual(self.lp_tags.parseTags(test), ["Test1", "Test2"])
+
+		self.assertEqual(self.lp_tags.parseTags(multiTagHard), ["competence", "attentiontodetail", "safetyconsciousness"])
+
+
+
+	def testFailureModes(self):
+		justTag = "#"
+		floatingTag = " # "
+		noTag = "Don't return anything"
+
+
 
 class testSentimentAnalysis():
 	print("testSentimentAnalysis not implemented")
+
+
+class testJSONOutput(unittest.TestCase):
+
+	def setUp(self):
+		self.lp_json = logEntryParser()
+		self.namedEntites = ["HomerSimpson", "CarlCarlson", "MindySimmons"]
+
+	def testOutputSuccess(self):
+
+		logEntry1 = "On January 15th, 2021, @HomerSimpson was observed to perform to a satisfactory standard. \
+		This was evidenced by his successful completion of a routine safety check on Reactor 4. \
+		His actions show #competence #attentiontodetail #safetyconsciousness."
+
+		entity1 = "HomerSimpson"
+		date1 = "2021/01/15"
+		tags1 = ["competence", "attentiontodetail", "safetyconsciousness"]
+
+		returnedDict = self.lp_json.convertLogToJSON(logEntry1, self.namedEntites, "2021")
+
+		self.assertEqual(returnedDict["entity"], entity1)
+		self.assertEqual(returnedDict["date"], date1)
+		self.assertEqual(returnedDict["tagList"], tags1)
+		self.assertEqual(returnedDict["observation"], logEntry1)
+
+		js = json.dumps(returnedDict, indent=4)
+
+		print(js)
+
+class testInputHandling(unittest.TestCase):
+	def setUp(self):
+		self.fileName = "observations.txt"
+		self.handler = inputHandler("bulk", self.fileName)
+		self.namedEntites = ["HomerSimpson", "CarlCarlson", "MindySimmons"]
+
+	def testBulkImport(self):
+		observationList = self.handler.bulkImport()
+
+		self.lp = logEntryParser()
+
+		for observation in observationList:
+			print(self.lp.convertLogToJSON(observation, self.namedEntites, "2021"))
+
 
 if __name__ == '__main__':
 	unittest.main()
