@@ -25,7 +25,7 @@ if __name__=="__main__":
 		if docCounter >= 100:
 			outFileName = "./output/observation_"+str(docCounter)+".json"
 
-		dataDict = parser.convertLogToJSON(observation, listOfEntities, "2021")
+		dataDict = parser.convertLogToJSON(observation, listOfEntities, "MontgomeryBurns", "2021" )
 		
 		with open(outFileName,"w") as f:
 			json.dump(dataDict,f)

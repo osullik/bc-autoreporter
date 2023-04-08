@@ -117,7 +117,7 @@ class logEntryParser():
 						targetEntity = likelyCandidate
 
 				if targetEntity == None:
-					targetEntity = "<UNKNOWN>_"+candidateEntity[0]
+					targetEntity = "<UNKNOWN>_"+candidateEntity
 
 
 		return targetEntity
@@ -264,7 +264,7 @@ class logEntryParser():
 		return tagList
 
 
-	def convertLogToJSON(self, logEntry, entityList, defaultYear="2021"):
+	def convertLogToJSON(self, logEntry, entityList, observer, defaultYear="2021"):
 
 		entity = self.parseEntities(logEntry, entityList)
 		date = self.parseDates(logEntry, defaultYear)
@@ -276,6 +276,8 @@ class logEntryParser():
 		dictToJSONify["date"] = date
 		dictToJSONify["tagList"] = tagList
 		dictToJSONify["observation"] = logEntry
+		dictToJSONify['observer'] = observer
+		dictToJSONify['lastModified'] = (datetime.datetime.now()).strftime('%Y/%m/%d %H:%M:%S')
 
 		return dictToJSONify
 
