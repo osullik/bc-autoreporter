@@ -7,17 +7,17 @@
 - [X] Upload Dummy Dataset to Git @osullik
 
 ## Infrastructure
-- [ ] Establish Elasticsearch Instance on AWS
+- [X] Establish Elasticsearch Instance on AWS
 - [ ] Figure out how to push data into Elastic Instance on AWS
 - [ ] Establish Kibana Instance that interacts with Elastic on AWS
 
 ## Parser
-- [ ] Build Test Harness
+- [X] Build Test Harness
 - [ ] Build Framework for Input Parser (Single message --> JSON document)
-  - [ ] Build Entity Extractor
-  - [ ] Build Date Extractor
-  - [ ] Build Tag Extractor
-  - [ ] Build Sentiment Analyzer
+  - [X] Build Entity Extractor
+  - [X] Build Date Extractor
+  - [X] Build Tag Extractor
+  - [ ] Build Sentiment Analyzer @nicole
   
 ## Router
 - [ ] Build Service to Push JSON Document to Elasticsearch
