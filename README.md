@@ -7,7 +7,7 @@
 - [X] Upload Dummy Dataset to Git @osullik
 
 ## Infrastructure
-- [ ] Establish Elasticsearch Instance on AWS
+- [X] Establish Elasticsearch Instance on AWS
 - [ ] Figure out how to push data into Elastic Instance on AWS
 - [ ] Establish Kibana Instance that interacts with Elastic on AWS
 
