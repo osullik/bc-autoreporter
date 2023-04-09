@@ -123,21 +123,21 @@ if __name__=="__main__":
 	index_name = "obs2"
 	osc = openSearchConnector(domain,host, region)
 
-	try:
-		osc.deleteIndex("obs2")
-	except:
-		print("couldnt delete")
+	#try:
+	#	osc.deleteIndex("obs2")
+	#except:
+	#	print("couldnt delete")
 
-	osc.createIndex("obs2")
+	#osc.createIndex("obs2")
 
 	#with open('./output/observation_000.json') as jsonFile:
 	#	singleJSON = json.load(jsonFile)
 
 	#osc.uploadDocument("obs2", singleJSON)
 
-	osc.bulkUpload("./output", index_name)
+	#osc.bulkUpload("./output", index_name)
 
-	#results = osc.searchByName(index_name, "HomerSimpson")
-	#for result in results["hits"]["hits"]:
-	#	print(str(result["_source"])+"\n")
+	results = osc.searchByName(index_name, "HomerSimpson")
+	for result in results["hits"]["hits"]:
+		print(str(result["_source"])+"\n")
 

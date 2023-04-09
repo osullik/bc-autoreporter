@@ -41,3 +41,7 @@ if __name__=="__main__":
 				json.dump(dataDict,f)
 				#f.write("\n")
 			docCounter+=1
+
+
+def generateEmployeeDatabase(employeeList):
+	for employee in employeeList:
