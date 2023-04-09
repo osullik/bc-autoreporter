@@ -17,7 +17,7 @@
   - [X] Build Entity Extractor
   - [X] Build Date Extractor
   - [X] Build Tag Extractor
-  - [ ] Build Sentiment Analyzer @nicole
+  - [X] Build Sentiment Analyzer @nicole
   
 ## Router
 - [ ] Build Service to Push JSON Document to Elasticsearch
