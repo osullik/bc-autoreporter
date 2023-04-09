@@ -1,10 +1,24 @@
 # bc-autoreporter
-Project description here
+A tool to improve the feedback and report-generation process and empower people in any position of the management chain, including employees and employers, to view feedback trends over time and across several performance indicators. We accompished this by creating an end-to-end pipeline that gives structure to unstructured data and provides a modular framework, making it easy to adapt cutting edge data analysis and Natural Language Processing techniques to streamline the feedback process.
 
 ## Project Motivation
+Employees often ask for (and managers seek to provide) feedback **"early and often"**. The reality of a hectic work environment means that this goal is rarely met well enough to give employees sufficient clarity about their job performance.
+
 Both of the members of our team have been fortunate enough to work in management over the last few years. One of the most stressful times of year for supervisors and their direct reports is annual performance review time. Even those rare managers who have been diligent note-takers need to find their notes, compile them and communicate with the users. The feedback loop is too slow and too much information is lost for meaningful improvements to me made, even when everyone commits that "it will be different this year". 
 
 Out project explores an approach to performance appraisal that is participative, transparent and almost instantaneous, all without having to fill out annoying forms or send emails back and forth.
+
+# Primary Artifacts
+- [Kibana 'Employee Deep Dive' Dashboard](https://search-bc23-autoreporter-4ob7m4onu2evrdqghxxcfoo6cu.us-east-1.es.amazonaws.com/_dashboards/goto/628493dcf3de2f1907a480f504bac7c8?security_tenant=global)
+- [Kibana 'Report Summaries' Dashboard](https://search-bc23-autoreporter-4ob7m4onu2evrdqghxxcfoo6cu.us-east-1.es.amazonaws.com/_dashboards/goto/0d7f056268de7146bdef4d8056dbbf8b?security_tenant=global)
+
+## Technologies, Tools, and APIs Used
+- Kibana
+- AWS Elastic OpenSearch
+- Twillio
+- Python
+- NLP libraries: Hugging Face, NLTK, PyTorch
+- Chat-GPT
 
 # Generating Synthetic Report Data
 As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. We elected to use the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
@@ -37,7 +51,7 @@ The model condenses the entire collection of reports for each employee into a fe
 </p>
 
 # Report Sentiment Analysis
-Info here
+To further aid in understanding trends across reports, we used Python's [Natural Language Tool Kit NLTK](https://www.nltk.org/) to perform Part of Speech (POS) Tagging and Sentiment Analysis on the content of the reports. Linguistically, adjectives and adverbs are typically most indicative of the sentiment of a piece of text, so we exctracted those words from the reports and flagged them, creating an additional field in the ElasticSearch schema to allow for further analysis of sentiment trends via the Kibana dashboards. We also used [VADER (Valence Aware Dictionary and sEntiment Reasoner)](https://github.com/cjhutto/vaderSentiment),  an open-source lexicon and rule-based sentiment analysis tool, to compute overall sentiment scores for each report entered in the database.
 ___
 
 # Project Development Plan
