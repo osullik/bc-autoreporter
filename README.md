@@ -11,10 +11,10 @@ Out project explores an approach to performance appraisal that is participative,
 # Primary Artifacts
 - [Kibana 'Employee Deep Dive' Dashboard](https://search-bc23-autoreporter-4ob7m4onu2evrdqghxxcfoo6cu.us-east-1.es.amazonaws.com/_dashboards/goto/628493dcf3de2f1907a480f504bac7c8?security_tenant=global) 
 -      USERNAME: user, PASSWORD: Bitcamp1!
--      [Static version](https://github.com/osullik/bc-autoreporter/blob/main/KibanaDeepDive.pdf)
+- [Static version](https://github.com/osullik/bc-autoreporter/blob/main/KibanaDeepDive.pdf)
 - [Kibana 'Report Summaries' Dashboard](https://search-bc23-autoreporter-4ob7m4onu2evrdqghxxcfoo6cu.us-east-1.es.amazonaws.com/_dashboards/goto/0d7f056268de7146bdef4d8056dbbf8b?security_tenant=global)
 -      USERNAME: user, PASSWORD: Bitcamp1!
--       [Static version](https://github.com/osullik/bc-autoreporter/blob/main/KibanaSummaries.pdf)
+- [Static version](https://github.com/osullik/bc-autoreporter/blob/main/KibanaSummaries.pdf)
 - A system that leverages the way that we like to communicate to facilitate making feedback more transparent.
 
 ## Technologies, Tools, and APIs Used
