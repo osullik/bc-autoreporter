@@ -9,11 +9,11 @@ Out project explores an approach to performance appraisal that is participative,
 # Generating Synthetic Report Data
 As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. We elected to use the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
   
-    Pretend you are Mr Burns from the TV show 'The Simpsons'. In 2021 you observed Homer Simpson's work and kept a log of his performance. What are 10 entries from that     log? Each entry should be of the form:
+    Pretend you are Mr Burns from the TV show 'The Simpsons'. In 2021 you observed Homer Simpson's work and kept a log of his performance. What are 10 entries from that log? Each entry should be of the form:
 
-    On <date> @name was observed to perform to a <poor / satisfactory / good / very good / excellent> standard. This was evidenced by  <summary of action>. Their actions     show <list attributes here that match the action, each prepended with a #>
+    On <date> @name was observed to perform to a <poor / satisfactory / good / very good / excellent> standard. This was evidenced by  <summary of action>. Their actions show <list attributes here that match the action, each prepended with a #>
 
-    For each summary of action in the log, fabricate some specific examples, using other characters or locations from around the nuclear power plant in the show 'the         simpsons'
+    For each summary of action in the log, fabricate some specific examples, using other characters or locations from around the nuclear power plant in the show 'the simpsons'
 
 Small corrections, modifications and specific event prompts were made to generate approximately 210 ovservations across 10 Neuclear Power Plant Employees. 
   
