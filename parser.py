@@ -6,12 +6,12 @@ from nltk.metrics.distance  import edit_distance
 import datefinder, datetime
 from string import punctuation
 import json
+from nltk.sentiment import SentimentIntensityAnalyzer
 
-'''
+nltk.download('vader_lexicon')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('maxent_ne_chunker')
 nltk.download('words')
-'''
 
 # Input Args:
 #	reporter	-	string	-	The person reporting the observation
@@ -158,7 +158,7 @@ class logEntryParser():
 
 		if len(matches) > 0:											# Convert to YYYY/MM/DD formatted string
 		    for date in matches:
-		        formattedMatches.append(date.strftime('%Y/%m/%d'))
+		        formattedMatches.append(date.strftime('%Y-%m-%d'))
 
 		    dateToReturn = formattedMatches[0]							# Return the first date mentioned in the text
 		
@@ -211,7 +211,7 @@ class logEntryParser():
 			if len(candidateMatch) > 0:	
 													# Convert to YYYY/MM/DD formatted string
 				for date in candidateMatch:
-					formattedMatches.append(date.strftime('%Y/%m/%d'))
+					formattedMatches.append(date.strftime('%Y-%m-%d'))
 
 				dateToReturn = formattedMatches[0]
 				
@@ -223,7 +223,7 @@ class logEntryParser():
 				formattedMatches = []											# List to hold the string formatted dates
 				if len(matches) > 0:											# Convert to YYYY/MM/DD formatted string
 				    for date in matches:
-				        formattedMatches.append(date.strftime('%Y/%m/%d'))
+				        formattedMatches.append(date.strftime('%Y-%m-%d'))
 
 				    dateToReturn = formattedMatches[0]							# Return the first date mentioned in the text
 
@@ -263,12 +263,28 @@ class logEntryParser():
 
 		return tagList
 
+	# VADER (Valence Aware Dictionary and sEntiment Reasoner) is an open-source lexicon and rule-based sentiment analysis tool 
+	# that is specifically attuned to sentiments expressed in social media.
+	# Compound score is used to determine sentiment. It ranges from -1 (extreme negative) to +1 (extrememly positive)
+	def sentiment_score(self, text):
+  		sia = SentimentIntensityAnalyzer()
+  		return sia.polarity_scores(text)['compound']
+
+
+	# Function to return all adjectives and adverbs from the report text
+	# Descriptive words (adjectives and adverbs) are most likely to influence the sentiment of the text.
+	def extract_adj(self, text):
+		tagged_text = nltk.pos_tag(text.split())
+		return [i[0].strip(punctuation) for i in tagged_text if i[1] in ['RB','RBR','RBS','JJ','JJR','JJS']]  # adjectives or adverbs
+
 
 	def convertLogToJSON(self, logEntry, entityList, observer, defaultYear="2021"):
 
 		entity = self.parseEntities(logEntry, entityList)
 		date = self.parseDates(logEntry, defaultYear)
 		tagList = self.parseTags(logEntry)
+		sentiment = self.sentiment_score(logEntry)
+		adjectives = self.extract_adj(logEntry)
 
 		dictToJSONify = {}
 
@@ -276,8 +292,10 @@ class logEntryParser():
 		dictToJSONify["date"] = date
 		dictToJSONify["tagList"] = tagList
 		dictToJSONify["observation"] = logEntry
+		dictToJSONify["sentiment"] = sentiment
+		dictToJSONify["adjectives"] = adjectives
 		dictToJSONify['observer'] = observer
-		dictToJSONify['lastModified'] = (datetime.datetime.now()).strftime('%Y/%m/%d %H:%M:%S')
+		dictToJSONify['lastModified'] = (datetime.datetime.now()).strftime('%Y-%m-%dT%H:%M:%S')
 
 		return dictToJSONify
 

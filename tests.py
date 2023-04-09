@@ -73,7 +73,7 @@ class testDateExtraction(unittest.TestCase):
 		successList = [dashDate, americanDate, americanDateShort, longDate, mediumDate, shortNoYear, longNoYear, longNoYear2, hardTest, hardTest2]
 
 		for test in successList:
-			self.assertEqual(self.lp_dates.parseDates(test, "2021"), "2021/02/28")
+			self.assertEqual(self.lp_dates.parseDates(test, "2021"), "2021-02-28")
 
 
 	def testFailureModes(self):
@@ -97,7 +97,7 @@ class testDateExtraction(unittest.TestCase):
 		#	self.assertNotEqual(self.lp_dates.parseDates(test, "2021"), "2021/04/02")
 
 		for test in notExistList:
-			self.assertNotEqual(self.lp_dates.parseDates(test, "2021"), "2021/02/34")
+			self.assertNotEqual(self.lp_dates.parseDates(test, "2021"), "2021-02-34")
 
 class testTagExtraction(unittest.TestCase):
 	
@@ -160,7 +160,7 @@ class testJSONOutput(unittest.TestCase):
 		His actions show #competence #attentiontodetail #safetyconsciousness."
 
 		entity1 = "HomerSimpson"
-		date1 = "2021/01/15"
+		date1 = "2021-01-15"
 		tags1 = ["competence", "attentiontodetail", "safetyconsciousness"]
 
 		returnedDict = self.lp_json.convertLogToJSON(logEntry1, self.namedEntites, "2021")
