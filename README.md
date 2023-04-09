@@ -38,9 +38,9 @@
   
   
 <p align="center">
-  <img src="https://github.com/osullik/bc-autoreporter/blob/main/green%20watcher%20marshie.svg" width="150" >
-  <img src="https://github.com/osullik/bc-autoreporter/blob/main/red%20rider%20marshie.svg" width="175">
-  <img src="https://github.com/osullik/bc-autoreporter/blob/main/blue%20hiker%20marshie.svg" width="150">
+  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/green%20watcher%20marshie.svg" width="150" >
+  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/red%20rider%20marshie.svg" width="175">
+  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/blue%20hiker%20marshie.svg" width="150">
 </p>
 
 # Bugs
