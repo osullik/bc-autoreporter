@@ -23,8 +23,8 @@
 - [ ] Build Service to Push JSON Document to Elasticsearch
 
 ## Dashboards:
-- [ ] Build Supervisor Dashboard in Kibana
-- [ ] Build Employee Dashboard in Kibana
+- [X] Build Supervisor Dashboard in Kibana
+- [X] Build Employee Dashboard in Kibana
 - [ ] Build Report Summarizer
 
 ## Input management (Extension)
@@ -37,3 +37,6 @@
   <img src="https://github.com/osullik/bc-autoreporter/blob/main/red%20rider%20marshie.svg" width="175">
   <img src="https://github.com/osullik/bc-autoreporter/blob/main/blue%20hiker%20marshie.svg" width="150">
 </p>
+
+# Bugs
+- Some dates are being marked as adjectives from the raw text processing
