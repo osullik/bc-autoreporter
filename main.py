@@ -30,8 +30,12 @@ if __name__=="__main__":
 			if docCounter >= 100:
 				outFileName = "./output/observation_"+str(docCounter)+".json"
 
+
 			dataDict = parser.convertLogToJSON(observation, listOfEntities, observer, "2021")
 			
+			#print(docCounter, file, observer,dataDict['entity'])
+
+
 			with open(outFileName,"w") as f:								#Uncomment two lines below to create output for manual upload through dashbaord
 				#f.write("PUT /observation-log/_doc/"+str(docCounter)+"\n")
 				json.dump(dataDict,f)
