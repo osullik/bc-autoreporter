@@ -4,6 +4,7 @@ import boto3
 from datetime import datetime
 import os
 import json
+from summarizer import Summarizer
 #from urllib.error import HTTPError
 
 class openSearchConnector():
@@ -87,8 +88,6 @@ class openSearchConnector():
 
 		#TODO: Check if document exists
 
-
-
 		self.search.index(index_name, body=observationJSON)
 
 	def bulkUpload(self, dataSource, index_name):
@@ -137,7 +136,24 @@ if __name__=="__main__":
 
 	#osc.bulkUpload("./output", index_name)
 
-	results = osc.searchByName(index_name, "HomerSimpson")
-	for result in results["hits"]["hits"]:
-		print(str(result["_source"])+"\n")
+	listOfEntities = [	"HomerSimpson", 	"WaylonSmithers", 	"LennyLeonard", 
+						"CarlCarlson", 		"MindySimmons", 	"FrankGrimes", 
+						"CanaryMBurns", 	"Karl", 			"StuartDuck", 
+						"Tibor", 			"Zutroy" ]
+
+	for entity in listOfEntities:
+		print("Generating Summary of", entity)
+
+		results = osc.searchByName(index_name, entity)
+		listOfDicts = []
+		for result in results["hits"]["hits"]:
+			listOfDicts.append(result["_source"])
+
+		sumer = Summarizer()
+		output = (sumer.employee_summarize(listOfDicts))
+
+		with open("./"+entity+"_summary.txt",'w') as f:
+			f.write(output)
+
+
 

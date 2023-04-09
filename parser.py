@@ -87,35 +87,37 @@ class logEntryParser():
 		candidateList = []
 
 		naiveTokenization = logEntry.split(' ')							# Tokenize based on whitespace
-
 		for token in naiveTokenization:									# Loop through all tokens
-			if token[0] == "@":											# Identify those starting with @
-				candidateEntity = token[1:]								# Extract the likely entity 
-				candidateList.append(candidateEntity)
-																			#TODO - Early Stopping
+			if len(token) != 0:
+				if token[0] == "@":											# Identify those starting with @
+					candidateEntity = token[1:]								# Extract the likely entity 
+					candidateList.append(candidateEntity)
+																				#TODO - Early Stopping
 
-				if candidateEntity in namedEntities:					# Check for exact entity matches
-					targetEntity = candidateEntity
-			
-				else:													# Check for close misses (spelling errors)
-					minDist = 1000
-					likelyCandidate = None
-					distList = []
+					if candidateEntity in namedEntities:					# Check for exact entity matches
+						targetEntity = candidateEntity
+				
+					else:													# Check for close misses (spelling errors)
+						minDist = 1000
+						likelyCandidate = None
+						distList = []
 
-					for entity in namedEntities:
-						dist = edit_distance(candidateEntity.lower(), 
-							entity.lower())
-						distList.append((entity, dist))
-						
-						if dist < minDist:
-							minDist = dist 
-							likelyCandidate = entity
+						for entity in namedEntities:
+							dist = edit_distance(candidateEntity.lower(), 
+								entity.lower())
+							distList.append((entity, dist))
+							
+							if dist < minDist:
+								minDist = dist 
+								likelyCandidate = entity
 
-					if minDist < stringDistanceTolerance:				# Return the closest string with < a threshold of error
-						targetEntity = likelyCandidate
+						if minDist < stringDistanceTolerance:				# Return the closest string with < a threshold of error
+							targetEntity = likelyCandidate
 
-				if targetEntity == None:
-					targetEntity = "<UNKNOWN>_"+candidateEntity
+					if targetEntity == None:
+						targetEntity = "<UNKNOWN>_"+candidateEntity
+				else:
+					pass
 
 
 		return targetEntity

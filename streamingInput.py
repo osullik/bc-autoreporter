@@ -51,19 +51,25 @@ class streamingInputHandler():
 
 		jsonToPush = json.dumps(parsedLogAsDict)
 
-		print(jsonToPush)
+		#print(jsonToPush)
 
 		self.connector.uploadDocument(index_name=self.index_name,observationJSON=jsonToPush)
 
 		#Log for record keeping
 		with open(self.logFile, "a") as log:
-			log.write(str(datetime.datetime.now()) + " report from "+parsedLogAsDict['observer']+" about "+parsedLogAsDict['entity']+" has been pushed to "+ self.index_name+"\n") 
-
-		with open(self.logDirectory+"/"+str(datetime.datetime.now())+"_obs_"+parsedLogAsDict['observer']+"_"+parsedLogAsDict['entity'], "w") as record:
-			json.dump(parsedLogAsDict,record)
+			try:
+				log.write(str(datetime.datetime.now()) + " report from "+parsedLogAsDict['observer']+" about "+parsedLogAsDict['entity']+" has been pushed to "+ self.index_name+"\n") 
+			except TypeError:
+				log.write(str(datetime.datetime.now())+"_ERROR_")
+		try:
+			with open(self.logDirectory+"/"+str(datetime.datetime.now())+"_obs_"+parsedLogAsDict['observer']+"_"+parsedLogAsDict['entity'], "w") as record:
+				json.dump(parsedLogAsDict,record)
+		except:
+			pass
 
 
 if __name__=="__main__":
+	
 	streamer = streamingInputHandler("streamlogs","./logs")
 
 	streamInput1 = "@FrankGrimes was observed to have continued conflict with @HomerSimpson. \

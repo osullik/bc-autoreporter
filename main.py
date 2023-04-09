@@ -1,47 +1,73 @@
-import json
+import json, os
 
 from parser import logEntryParser
 from parser import inputHandler
+from elasticConnector import openSearchConnector
 
-if __name__=="__main__":
-	inputFiles = [("observations.txt", "MontgomeryBurns"),("observations_smithers.txt", "WaylonSmithers")]
-
-	listOfEntities = [	"HomerSimpson", 	"WaylonSmithers", 	"LennyLeonard", 
+listOfEntities = [	"HomerSimpson", 	"WaylonSmithers", 	"LennyLeonard", 
 						"CarlCarlson", 		"MindySimmons", 	"FrankGrimes", 
 						"CanaryMBurns", 	"Karl", 			"StuartDuck", 
 						"Tibor", 			"Zutroy" ]
 
+def updateSummaries(entity, summary):
+	domain = 'bc23-autoreporter'
+	host = 'search-bc23-autoreporter-4ob7m4onu2evrdqghxxcfoo6cu.us-east-1.es.amazonaws.com'
+	region = "us-east-1"
 
-	handler = inputHandler()
-	parser = logEntryParser()
+	index_name = "employee_list"
 
-	docCounter = 0
+	connector = openSearchConnector(domain,host,region)
 
-	for (file,observer) in inputFiles:
+	the_json = {"name":entity,
+				"performance_summary":summary}
 
-		observations = handler.bulkImport(file)
+	connector.uploadDocument(index_name=index_name,observationJSON=the_json)
 
-		for observation in observations:
+if __name__=="__main__":
+	inputFiles = [("observations.txt", "MontgomeryBurns"),("observations_smithers.txt", "WaylonSmithers")]
 
-			if docCounter < 10:
-				outFileName = "./output/observation_00"+str(docCounter)+".json"
-			if docCounter >=10 and docCounter < 100:
-				outFileName = "./output/observation_0"+str(docCounter)+".json"
-			if docCounter >= 100:
-				outFileName = "./output/observation_"+str(docCounter)+".json"
+	
 
 
-			dataDict = parser.convertLogToJSON(observation, listOfEntities, observer, "2021")
+	'''handler = inputHandler()
+				parser = logEntryParser()
 			
-			#print(docCounter, file, observer,dataDict['entity'])
+				docCounter = 0
+			
+				for (file,observer) in inputFiles:
+			
+					observations = handler.bulkImport(file)
+			
+					for observation in observations:
+			
+						if docCounter < 10:
+							outFileName = "./output/observation_00"+str(docCounter)+".json"
+						if docCounter >=10 and docCounter < 100:
+							outFileName = "./output/observation_0"+str(docCounter)+".json"
+						if docCounter >= 100:
+							outFileName = "./output/observation_"+str(docCounter)+".json"
+			
+			
+						dataDict = parser.convertLogToJSON(observation, listOfEntities, observer, "2021")
+						
+						#print(docCounter, file, observer,dataDict['entity'])
+			
+			
+						with open(outFileName,"w") as f:								#Uncomment two lines below to create output for manual upload through dashbaord
+							#f.write("PUT /observation-log/_doc/"+str(docCounter)+"\n")
+							json.dump(dataDict,f)
+							#f.write("\n")
+						docCounter+=1'''
+
+	filesToUpload = os.listdir("./summaries")
+	
+	for file in filesToUpload:
+		intermediate = file.split("_")
+		entity = intermediate[0]
+
+		with open("./summaries"+"/"+file,"r") as f:
+			summary = f.read()
+
+		updateSummaries(entity,summary)
 
 
-			with open(outFileName,"w") as f:								#Uncomment two lines below to create output for manual upload through dashbaord
-				#f.write("PUT /observation-log/_doc/"+str(docCounter)+"\n")
-				json.dump(dataDict,f)
-				#f.write("\n")
-			docCounter+=1
-
-
-def generateEmployeeDatabase(employeeList):
-	for employee in employeeList:
