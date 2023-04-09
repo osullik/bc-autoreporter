@@ -2,10 +2,27 @@
 Project description here
 
 ## Project Motivation
-Project motivation here. Simpsons is the example use case
+Both of the members of our team have been fortunate enough to work in management over the last few years. One of the most stressful times of year for supervisors and their direct reports is annual performance review time. Even those rare managers who have been diligent note-takers need to find their notes, compile them and communicate with the users. The feedback loop is too slow and too much information is lost. 
+
+Out project explores an approach to performance appraisal that is participative, transparent and almost instantaneous, all without having to fill out annoying forms or send emails back and forth.
 
 # Generating Synthetic Report Data
-Method description and reasoning here. [Chat-GPT](https://openai.com/blog/chatgpt)
+As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. We elected to use the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
+  
+    Pretend you are Mr Burns from the TV show 'The Simpsons'. In 2021 you observed Homer Simpson's work and kept a log of his performance. What are 10 entries from that     log? Each entry should be of the form:
+
+    On <date> @name was observed to perform to a <poor / satisfactory / good / very good / excellent> standard. This was evidenced by  <summary of action>. Their actions     show <list attributes here that match the action, each prepended with a #>
+
+    For each summary of action in the log, fabricate some specific examples, using other characters or locations from around the nuclear power plant in the show 'the         simpsons'
+
+Small corrections, modifications and specific event prompts were made to generate approximately 210 ovservations across 10 Neuclear Power Plant Employees. 
+  
+See [Chat-GPT](https://openai.com/blog/chatgpt) for more
+
+# Parsing
+Structured data is more useful than unstructured. It is typically also more laborious to produce and a deterrent to on-the-fly note takin. Our approach considered user ergonomics, and the knowledge that anything we can do to reduce the difficulty of use will increase likelihood of adoption. Guided by the realization that the use of very informally structured language utilizing symbols like '@' for entities and  '#' for themes we design our approach to embrace their use, rather than try to pull users towards a less natural approach. 
+
+Our parsing approach aims to maximise the amount of infomation extracted from the logs themselves, as well as expose managers and employees to meta aspects like the sentiment of language used by individuals, changes in performance over time and themes that might cut across entire sectors of the workforce. Bringing together this information without drowning anyone in it is a key step towards an improved performance appraisal system. 
 
 # Report Summarization
 Text summarization comes in 2 forms: *Exctractive* and *Abstractive*. Extractive summarization involves selecting a few key sentences or phrases from a long text, to produce a shorter summary, while leaving the rest of the information out. **Abstractive summarization** involves synthesizing a summary similar to an abstract, constructed of different sentences or phrases than appear in the long text being summarized. This method often involves combining dsentences that have redundant information, and skipping details that aren't key to the overall message of the text. For this project, we perform Abstractive Summarization on synthetically generated Employee Performance Reports, as part of a tool that is aimed at helping companies, supervisors, and their employees understand key performance metrics at a glance.
@@ -36,14 +53,14 @@ ___
 
 ### Parser
 - [X] Build Test Harness @osullik
-- [ ] Build Framework for Input Parser (Single message --> JSON document)
+- [X] Build Framework for Input Parser (Single message --> JSON document)
   - [X] Build Entity Extractor @osullik
   - [X] Build Date Extractor @osullik
   - [X] Build Tag Extractor @osullik
   - [X] Build Sentiment Analyzer @nicoleschneider
   
 ### Router
-- [ ] Build Service to Push JSON Document to Elasticsearch @osullik
+- [X] Build Service to Push JSON Document to Elasticsearch @osullik
 
 ### Dashboards:
 - [X] Build Supervisor Dashboard in Kibana @nicoleschneider
@@ -51,7 +68,7 @@ ___
 - [X] Build Report Summarizer @nicoleschneider
 
 ### Input management (Extension)
-- [ ] Build Message Handler
+- [X] Build Message Handler (Twilio)
 
 ### Finalize Documentation/Artifacts and Present
 - [ ] Clean up Git Repo
