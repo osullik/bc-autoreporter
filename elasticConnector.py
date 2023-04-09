@@ -86,6 +86,9 @@ class openSearchConnector():
 	def uploadDocument(self, index_name, observationJSON):
 
 		#TODO: Check if document exists
+
+
+
 		self.search.index(index_name, body=observationJSON)
 
 	def bulkUpload(self, dataSource, index_name):
@@ -96,11 +99,20 @@ class openSearchConnector():
 				jsonToUpload = json.load(f)
 			self.uploadDocument(index_name,jsonToUpload)
 
+	def searchByName(self,idx,name):
 
-
-
-
-
+		# Size is a big number here since we're doing exact matching, take the risk
+		query = {
+		  'size': 100,
+		  'query': {
+		    'multi_match': {
+		      'query': name,
+		      'fields': ['entity']
+		    }
+		  }
+			}
+		results = self.search.search(body=query,index=idx)
+		return(results)
 
 		
 if __name__=="__main__":
@@ -118,22 +130,14 @@ if __name__=="__main__":
 
 	osc.createIndex("obs2")
 
-	with open('./output/observation_000.json') as jsonFile:
-		singleJSON = json.load(jsonFile)
+	#with open('./output/observation_000.json') as jsonFile:
+	#	singleJSON = json.load(jsonFile)
 
 	#osc.uploadDocument("obs2", singleJSON)
 
 	osc.bulkUpload("./output", index_name)
 
+	#results = osc.searchByName(index_name, "HomerSimpson")
+	#for result in results["hits"]["hits"]:
+	#	print(str(result["_source"])+"\n")
 
-
-
-	'''document = {
-	    "title": "Moneyball",
-	    "director": "Bennett Miller",
-	    "year": "2011"
-	}
-
-	os.search.index(index="movies", id="5", body=document)
-
-	print(os.search.get(index="movies", id="5"))'''

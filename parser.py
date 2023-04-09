@@ -29,12 +29,11 @@ nltk.download('words')
 
 
 class inputHandler():
-	def __init__(self, inputType, fileName=None):
-		self.inputType = inputType
+	def __init__(self, fileName=None):
 		self.fileName = fileName
 		self.parser = logEntryParser()
 
-	def bulkImport(self):
+	def bulkImport(self, fileName=None):
 		'''
 		bulk import reads in a text file of observations. 
 		Assumptions: 
@@ -48,19 +47,18 @@ class inputHandler():
 		'''
 
 		observationList = []
-		if self.inputType == "bulk":
-			if self.fileName == None:
-				print("Need to specify Filename")
-			else:
-				with open(self.fileName) as inputLog:
-					observations = inputLog.readlines()
 
-					for observation in observations:
-						if observation.strip():
-							observationList.append(observation)
-				return observationList
-		else: 
-			print("Streaming input not implemented")
+		if fileName == None:
+			print("Need to specify Filename")
+		else:
+			with open(fileName) as inputLog:
+				observations = inputLog.readlines()
+
+				for observation in observations:
+					if observation.strip():
+						observationList.append(observation)
+			return observationList
+
 
 
 
@@ -268,7 +266,7 @@ class logEntryParser():
 	# Compound score is used to determine sentiment. It ranges from -1 (extreme negative) to +1 (extrememly positive)
 	def sentiment_score(self, text):
   		sia = SentimentIntensityAnalyzer()
-  		return sia.polarity_scores(text)['compound']
+  		return (sia.polarity_scores(text)['compound'])*100
 
 
 	# Function to return all adjectives and adverbs from the report text

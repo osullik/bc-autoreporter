@@ -4,32 +4,36 @@ from parser import logEntryParser
 from parser import inputHandler
 
 if __name__=="__main__":
-	inputFile = "observations.txt"
+	inputFiles = [("observations.txt", "MontgomeryBurns"),("observations_smithers.txt", "WaylonSmithers")]
+
 	listOfEntities = [	"HomerSimpson", 	"WaylonSmithers", 	"LennyLeonard", 
-						"CarkCarlson", 		"MindySimmons", 	"FrankGrimes", 
+						"CarlCarlson", 		"MindySimmons", 	"FrankGrimes", 
 						"CanaryMBurns", 	"Karl", 			"StuartDuck", 
 						"Tibor", 			"Zutroy" ]
 
-	handler = inputHandler("bulk", inputFile)
+
+	handler = inputHandler()
 	parser = logEntryParser()
 
-	observations = handler.bulkImport()
-
 	docCounter = 0
-	for observation in observations:
 
-		if docCounter < 10:
-			outFileName = "./output/observation_00"+str(docCounter)+".json"
-		if docCounter >=10 and docCounter < 100:
-			outFileName = "./output/observation_0"+str(docCounter)+".json"
-		if docCounter >= 100:
-			outFileName = "./output/observation_"+str(docCounter)+".json"
+	for (file,observer) in inputFiles:
 
-		dataDict = parser.convertLogToJSON(observation, listOfEntities, "MontgomeryBurns", "2021")
-		
-		with open(outFileName,"w") as f:
-			f.write("PUT /observation-log/_doc/"+str(docCounter)+"\n")
-			json.dump(dataDict,f)
-			f.write("\n")
-		docCounter+=1
+		observations = handler.bulkImport(file)
 
+		for observation in observations:
+
+			if docCounter < 10:
+				outFileName = "./output/observation_00"+str(docCounter)+".json"
+			if docCounter >=10 and docCounter < 100:
+				outFileName = "./output/observation_0"+str(docCounter)+".json"
+			if docCounter >= 100:
+				outFileName = "./output/observation_"+str(docCounter)+".json"
+
+			dataDict = parser.convertLogToJSON(observation, listOfEntities, observer, "2021")
+			
+			with open(outFileName,"w") as f:								#Uncomment two lines below to create output for manual upload through dashbaord
+				#f.write("PUT /observation-log/_doc/"+str(docCounter)+"\n")
+				json.dump(dataDict,f)
+				#f.write("\n")
+			docCounter+=1

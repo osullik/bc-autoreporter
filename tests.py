@@ -177,11 +177,11 @@ class testJSONOutput(unittest.TestCase):
 class testInputHandling(unittest.TestCase):
 	def setUp(self):
 		self.fileName = "observations.txt"
-		self.handler = inputHandler("bulk", self.fileName)
+		self.handler = inputHandler()
 		self.namedEntites = ["HomerSimpson", "CarlCarlson", "MindySimmons"]
 
 	def testBulkImport(self):
-		observationList = self.handler.bulkImport()
+		observationList = self.handler.bulkImport(self.fileName)
 
 		self.lp = logEntryParser()
 
