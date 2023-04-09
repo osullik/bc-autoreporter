@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/108
+{"entity": "MindySimmons", "date": "2021-11-20", "tagList": [], "observation": "On November 20th 2021, @MindySimmons was observed to perform to a poor standard. This was evidenced by her poor communication skills, which resulted in misunderstandings and delays.\n", "sentiment": -0.7351, "adjectives": ["poor", "poor"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:31:59"}

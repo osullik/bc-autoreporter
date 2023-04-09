@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/205
+{"entity": "Zutroy", "date": "2021-11-27", "tagList": ["diligence", "attention"], "observation": "On 2021-11-27 @Zutroy was observed to perform to a satisfactory standard. This was evidenced by his completion of assigned tasks, but with some delays and minor mistakes. His actions show #diligence and #attention to deadlines.\n", "sentiment": -0.3612, "adjectives": ["2021-11-27", "satisfactory", "assigned", "minor"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:01"}

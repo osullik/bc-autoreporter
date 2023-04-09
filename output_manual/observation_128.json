@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/128
+{"entity": null, "date": "2021-11-06", "tagList": ["integrity", "respect"], "observation": "On November 6th, Fr@FrankGrimesank was observed to perform to a poor standard. He made several errors on his tasks and was overheard making derogatory comments about Homer to another employee. Frank showed a lack of #integrity and #respect in his behavior.\n", "sentiment": -0.7783, "adjectives": ["poor", "several", "overheard", "derogatory"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}

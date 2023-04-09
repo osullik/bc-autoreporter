@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/5
+{"entity": "HomerSimpson", "date": "2021-06-07", "tagList": ["negligence", "lackofresponsibility", "safetyoversight"], "observation": "On June 7th, 2021, @HomerSimpson was observed to perform to a poor standard. This was evidenced by his failure to report a leak in a coolant pipe, which caused damage to nearby equipment. His actions show #negligence #lackofresponsibility #safetyoversight.\n", "sentiment": -0.9001, "adjectives": ["poor", "nearby", "negligence"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:31:58"}

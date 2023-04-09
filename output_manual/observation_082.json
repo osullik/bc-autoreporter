@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/82
+{"entity": "CarkCarlson", "date": "2021-07-04", "tagList": ["safetyconscious", "compliant"], "observation": "On July 4th, @CarlCarlson was observed to perform to an excellent standard. This was evidenced by his successful implementation of a new safety protocol in the plant. Carl's actions show his commitment to safety and following protocols, #safetyconscious #compliant.\n", "sentiment": 0.9403, "adjectives": ["excellent", "successful", "new", "protocols", "safetyconscious"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:31:59"}

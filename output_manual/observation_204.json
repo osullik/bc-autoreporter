@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/204
+{"entity": "Zutroy", "date": "2021-10-19", "tagList": ["teamwork", "communication"], "observation": "On 2021-10-19 @Zutroy was observed to perform to a good standard. This was evidenced by his collaboration with the maintenance team to repair a faulty pump in the cooling system. His actions show #teamwork and #communication skills.\n", "sentiment": 0.1531, "adjectives": ["2021-10-19", "good"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:01"}

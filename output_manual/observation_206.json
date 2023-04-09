@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/206
+{"entity": "Zutroy", "date": "2021-12-03", "tagList": ["assertiveness", "decisiveness"], "observation": "On 2021-12-03 @Zutroy was observed to perform to an excellent standard. This was evidenced by his leadership in coordinating the emergency response to a minor radiation leak. His actions show #assertiveness and #decisiveness.\n", "sentiment": -0.0772, "adjectives": ["2021-12-03", "excellent", "minor", "assertiveness", "decisiveness"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:01"}

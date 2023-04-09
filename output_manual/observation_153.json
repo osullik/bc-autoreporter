@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/153
+{"entity": null, "date": "2021-05-01", "tagList": ["accuracy", "precision", "nuclearknowledge"], "observation": "On May 1st, Stuart Duck was observed to perform to an excellent standard. This was evidenced by his ability to quack out precise measurements for radioactive materials, which reflects #accuracy #precision #nuclearknowledge.\n", "sentiment": 0.7184, "adjectives": ["excellent", "precise", "radioactive"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}

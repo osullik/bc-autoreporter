@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/78
+{"entity": "CarkCarlson", "date": "2021-03-10", "tagList": ["skilled", "meticulous"], "observation": "On March 10th, @CarlCarlson was observed to perform to a good standard. This was evidenced by his successful completion of a routine maintenance task on the nuclear reactor core. Carl's actions show his technical expertise and attention to detail, #skilled #meticulous.\n", "sentiment": 0.7717, "adjectives": ["good", "successful", "routine", "nuclear", "technical", "skilled"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:31:59"}

@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/161
+{"entity": "StuartDuck", "date": "2021-04-12", "tagList": ["efficiency", "ecofriendliness"], "observation": "On April 12th, @StuartDuck was observed to perform to a good standard. This was evidenced by his ability to swim in the cooling pond and keep the water clean of debris. His actions show #efficiency and #ecofriendliness.\n", "sentiment": 0.7845, "adjectives": ["good"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}

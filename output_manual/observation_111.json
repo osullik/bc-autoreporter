@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/111
+{"entity": "MindySimmons", "date": "2021-12-15", "tagList": [], "observation": "On December 15th 2021, @MindySimmons was observed to perform to a good standard. This was evidenced by her effective communication with the team, which resulted in a successful presentation.\n", "sentiment": 0.8689, "adjectives": ["good", "effective", "successful"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}

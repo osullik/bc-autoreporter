@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/162
+{"entity": "StuartDuck", "date": "2021-04-15", "tagList": ["vigilance", "alertness"], "observation": "On April 15th, @StuartDuck was observed to perform to a satisfactory standard. This was evidenced by his attempt to quack at a warning sound of an incoming emergency. His actions show #vigilance and #alertness.\n", "sentiment": -0.3612, "adjectives": ["satisfactory"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}

@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/182
+{"entity": "Tibor", "date": "2021-09-01", "tagList": ["disorganization", "incompetence"], "observation": "On September , Carl reported to me that @Tibor had misfiled the safety inspection records for the cooling system, causing confusion during a surprise inspection. This shows #disorganization and #incompetence.\n", "sentiment": 0.4019, "adjectives": [], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}

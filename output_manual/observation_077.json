@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/77
+{"entity": "CarkCarlson", "date": "2021-02-02", "tagList": ["quickthinking", "resourceful"], "observation": "On February 2nd, @CarlCarlson was observed to perform to an excellent standard. This was evidenced by his swift response to a minor power outage in Sector 7-G. Carl's actions show his strong problem-solving skills, #quickthinking #resourceful.\n", "sentiment": 0.8316, "adjectives": ["excellent", "minor", "7-G", "strong", "problem-solving"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:31:59"}

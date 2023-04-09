@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/24
+{"entity": "HomerSimpson", "date": "2021-08-22", "tagList": ["financialacumen", "thoroughness"], "observation": "On August 22nd, @HomerSimpson was observed to perform to a very good standard. This was evidenced by his management of Mr. Burns' finances, including payment of bills and tracking of expenses. His actions show #financialacumen and #thoroughness.\n", "sentiment": 0.4927, "adjectives": ["very", "good"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:31:58"}

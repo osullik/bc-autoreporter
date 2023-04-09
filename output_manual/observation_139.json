@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/139
+{"entity": "CanaryMBurns", "date": "2021-02-14", "tagList": ["compliance", "minimal"], "observation": "On February 14th, @CanaryMBurns was observed to perform to a satisfactory standard. She perched on her stand in the corner of the office, quietly singing to herself and occasionally pecking at her food. Her actions show #compliance and #minimal effort.\n", "sentiment": 0.3612, "adjectives": ["satisfactory", "quietly", "occasionally", "minimal"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}

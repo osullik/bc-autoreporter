@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/179
+{"entity": "Tibor", "date": "2021-06-15", "tagList": [""], "observation": "On June 15, 2021 @Tibor was observed to perform to a <poor / satisfactory / good / very good / excellent> standard. This was evidenced by <summary of action>. Their actions show <list attributes here that match the action, each prepended with a #>.\n", "sentiment": 0.8074, "adjectives": ["poor", "good", "very", "good", "list", "here", "action"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}

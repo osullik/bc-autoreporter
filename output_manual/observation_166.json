@@ -1,0 +1,2 @@
+PUT /observation-log/_doc/166
+{"entity": "StuartDuck", "date": "2021-04-25", "tagList": ["composure", "adaptability"], "observation": "On April 25th, @StuartDuck was observed to perform to a good standard. This was evidenced by his ability to keep calm and not get startled by the loud noises and vibrations of the power plant machines. His actions show #composure and #adaptability.\n", "sentiment": 0.7916, "adjectives": ["good", "not", "loud"], "observer": "MontgomeryBurns", "lastModified": "2023-04-08T20:32:00"}
