@@ -1,6 +1,12 @@
 # bc-autoreporter
 Project description here
 
+## Project Motivation
+Project motivation here. Simpsons is the example use case
+
+# Generating Synthetic Report Data
+Method description and reasoning here. [Chat-GPT](https://openai.com/blog/chatgpt)
+
 # Report Summarization
 Text summarization comes in 2 forms: *Exctractive* and *Abstractive*. Extractive summarization involves selecting a few key sentences or phrases from a long text, to produce a shorter summary, while leaving the rest of the information out. **Abstractive summarization** involves synthesizing a summary similar to an abstract, constructed of different sentences or phrases than appear in the long text being summarized. This method often involves combining dsentences that have redundant information, and skipping details that aren't key to the overall message of the text. For this project, we perform Abstractive Summarization on synthetically generated Employee Performance Reports, as part of a tool that is aimed at helping companies, supervisors, and their employees understand key performance metrics at a glance.
 
