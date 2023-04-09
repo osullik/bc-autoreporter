@@ -29,9 +29,14 @@
 
 ## Input management (Extension)
 - [ ] Build Message Handler
-  
-  
 
+## Clean Up and Present
+- [ ] Clean up Git Repo
+- [ ] Choose 3 submission categories
+- [ ] Submit to Devpost by 0930
+- [ ] Prep demo by 1030
+  
+  
 <p align="center">
   <img src="https://github.com/osullik/bc-autoreporter/blob/main/green%20watcher%20marshie.svg" width="150" >
   <img src="https://github.com/osullik/bc-autoreporter/blob/main/red%20rider%20marshie.svg" width="175">
