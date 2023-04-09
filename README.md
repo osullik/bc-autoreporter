@@ -38,8 +38,8 @@
   
   
 <p align="center">
-  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/greenWatcherMarshie.svg" width="150" >
-  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/redRiderMarshie.svg" width="175">
+  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/greenHikerMarshie.svg" width="150" >
+  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/redHikerMarshie.svg" width="175">
   <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/blueHikerMarshie.svg" width="150">
 </p>
 
