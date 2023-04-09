@@ -8,8 +8,8 @@
 
 ## Infrastructure
 - [X] Establish Elasticsearch Instance on AWS
-- [ ] Figure out how to push data into Elastic Instance on AWS
-- [ ] Establish Kibana Instance that interacts with Elastic on AWS
+- [X] Figure out how to push data into Elastic Instance on AWS
+- [X] Establish Kibana Instance that interacts with Elastic on AWS
 
 ## Parser
 - [X] Build Test Harness
@@ -25,7 +25,7 @@
 ## Dashboards:
 - [X] Build Supervisor Dashboard in Kibana
 - [X] Build Employee Dashboard in Kibana
-- [ ] Build Report Summarizer
+- [X] Build Report Summarizer
 
 ## Input management (Extension)
 - [ ] Build Message Handler
@@ -38,9 +38,9 @@
   
   
 <p align="center">
-  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/green%20watcher%20marshie.svg" width="150" >
-  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/red%20rider%20marshie.svg" width="175">
-  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/blue%20hiker%20marshie.svg" width="150">
+  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/greenWatcherMarshie.svg" width="150" >
+  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/redRiderMarshie.svg" width="175">
+  <img src="https://github.com/osullik/bc-autoreporter/blob/main/images/blueHikerMarshie.svg" width="150">
 </p>
 
 # Bugs
