@@ -8,10 +8,10 @@ from string import punctuation
 import json
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-nltk.download('vader_lexicon')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('maxent_ne_chunker')
-nltk.download('words')
+#nltk.download('vader_lexicon')
+#nltk.download('averaged_perceptron_tagger')
+#nltk.download('maxent_ne_chunker')
+#nltk.download('words')
 
 # Input Args:
 #	reporter	-	string	-	The person reporting the observation

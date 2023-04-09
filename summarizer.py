@@ -5,7 +5,7 @@ import torch
 import random
 import re
 import nltk
-nltk.download('punkt')
+#nltk.download('punkt')
 
 class Summarizer():
 	def __init__(self):

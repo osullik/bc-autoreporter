@@ -122,20 +122,22 @@ if __name__=="__main__":
 	index_name = "obs2"
 	osc = openSearchConnector(domain,host, region)
 
-	#try:
-	#	osc.deleteIndex("obs2")
-	#except:
-	#	print("couldnt delete")
+	try:
+		osc.deleteIndex("obs2")
+	except:
+		print("couldnt delete")
 
-	#osc.createIndex("obs2")
+	osc.createIndex("obs2")
 
 	#with open('./output/observation_000.json') as jsonFile:
 	#	singleJSON = json.load(jsonFile)
 
 	#osc.uploadDocument("obs2", singleJSON)
 
-	#osc.bulkUpload("./output", index_name)
-
+	osc.bulkUpload("./output", index_name)
+	
+	'''
+	#code to generate the summaries of text
 	listOfEntities = [	"HomerSimpson", 	"WaylonSmithers", 	"LennyLeonard", 
 						"CarlCarlson", 		"MindySimmons", 	"FrankGrimes", 
 						"CanaryMBurns", 	"Karl", 			"StuartDuck", 
@@ -154,6 +156,6 @@ if __name__=="__main__":
 
 		with open("./"+entity+"_summary.txt",'w') as f:
 			f.write(output)
-
+	'''
 
 
