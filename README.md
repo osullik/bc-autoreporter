@@ -1,4 +1,4 @@
-# bc-autoreporter
+# Mr. FAT (Management and Feedback Analysis Tool)
 A tool to improve the feedback and report-generation process and empower people in any position of the management chain, including employees and employers, to view feedback trends over time and across several performance indicators. We accompished this by creating an end-to-end pipeline that gives structure to unstructured data and provides a modular framework, making it easy to adapt cutting edge data analysis and Natural Language Processing techniques to streamline the feedback process.
 
 ## Project Motivation
