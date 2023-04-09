@@ -225,7 +225,9 @@ class logEntryParser():
 
 				    dateToReturn = formattedMatches[0]							# Return the first date mentioned in the text
 
-
+		if dateToReturn == None:												# Given it's streaming, assume today if not included
+			dateToReturn = (datetime.datetime.now()).strftime('%Y-%m-%d')
+		
 		return dateToReturn
 
 	def parseTags(self, logEntry):
