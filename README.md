@@ -21,7 +21,7 @@ Out project explores an approach to performance appraisal that is participative,
 - Chat-GPT
 
 # Generating Synthetic Report Data
-As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. We elected to use the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
+As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. As a motivating use case, we used the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
   
     Pretend you are Mr Burns from the TV show 'The Simpsons'. In 2021 you observed Homer Simpson's work and kept a log of his performance. What are 10 entries from that log? Each entry should be of the form:
 
@@ -29,7 +29,7 @@ As we didn't have access to real performance appraisal material we elected to ge
 
     For each summary of action in the log, fabricate some specific examples, using other characters or locations from around the nuclear power plant in the show 'the simpsons'
 
-Small corrections, modifications and specific event prompts were made to generate approximately 210 ovservations across 10 Neuclear Power Plant Employees. 
+Small corrections, modifications and specific event prompts were made to generate approximately 210 observations across 10 Nuclear Power Plant Employees. 
   
 See [Chat-GPT](https://openai.com/blog/chatgpt) for more
 
@@ -85,10 +85,8 @@ ___
 - [X] Build Message Handler (Twilio)
 
 ### Finalize Documentation/Artifacts and Present
-- [ ] Clean up Git Repo
-- [ ] Choose 3 submission categories
-- [ ] Submit to Devpost by 0930
-- [ ] Prep demo by 1030
+- [X] Submit to Devpost by 0930
+- [X] Prep demo by 1030
   
   
 <p align="center">
