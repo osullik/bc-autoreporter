@@ -1,4 +1,4 @@
-# bc-autoreporter
+# Mr. FAT (Management Reporting and Feedback Analysis Tool)
 A tool to improve the feedback and report-generation process and empower people in any position of the management chain, including employees and employers, to view feedback trends over time and across several performance indicators. We accompished this by creating an end-to-end pipeline that gives structure to unstructured data and provides a modular framework, making it easy to adapt cutting edge data analysis and Natural Language Processing techniques to streamline the feedback process.
 
 ## Project Motivation
@@ -9,8 +9,13 @@ Both of the members of our team have been fortunate enough to work in management
 Out project explores an approach to performance appraisal that is participative, transparent and almost instantaneous, all without having to fill out annoying forms or send emails back and forth.
 
 # Primary Artifacts
-- [Kibana 'Employee Deep Dive' Dashboard](https://search-bc23-autoreporter-4ob7m4onu2evrdqghxxcfoo6cu.us-east-1.es.amazonaws.com/_dashboards/goto/628493dcf3de2f1907a480f504bac7c8?security_tenant=global)
+- [Kibana 'Employee Deep Dive' Dashboard](https://search-bc23-autoreporter-4ob7m4onu2evrdqghxxcfoo6cu.us-east-1.es.amazonaws.com/_dashboards/goto/628493dcf3de2f1907a480f504bac7c8?security_tenant=global) 
+-      USERNAME: user, PASSWORD: Bitcamp1!
+- [Static version](https://github.com/osullik/bc-autoreporter/blob/main/KibanaDeepDive.pdf)
 - [Kibana 'Report Summaries' Dashboard](https://search-bc23-autoreporter-4ob7m4onu2evrdqghxxcfoo6cu.us-east-1.es.amazonaws.com/_dashboards/goto/0d7f056268de7146bdef4d8056dbbf8b?security_tenant=global)
+-      USERNAME: user, PASSWORD: Bitcamp1!
+- [Static version](https://github.com/osullik/bc-autoreporter/blob/main/KibanaSummaries.pdf)
+- A system that leverages the way that we like to communicate to facilitate making feedback more transparent.
 
 ## Technologies, Tools, and APIs Used
 - Kibana
@@ -21,7 +26,7 @@ Out project explores an approach to performance appraisal that is participative,
 - Chat-GPT
 
 # Generating Synthetic Report Data
-As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. We elected to use the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
+As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. As a motivating use case, we used the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
   
     Pretend you are Mr Burns from the TV show 'The Simpsons'. In 2021 you observed Homer Simpson's work and kept a log of his performance. What are 10 entries from that log? Each entry should be of the form:
 
@@ -29,7 +34,7 @@ As we didn't have access to real performance appraisal material we elected to ge
 
     For each summary of action in the log, fabricate some specific examples, using other characters or locations from around the nuclear power plant in the show 'the simpsons'
 
-Small corrections, modifications and specific event prompts were made to generate approximately 210 ovservations across 10 Neuclear Power Plant Employees. 
+Small corrections, modifications and specific event prompts were made to generate approximately 210 observations across 10 Nuclear Power Plant Employees. 
   
 See [Chat-GPT](https://openai.com/blog/chatgpt) for more
 
@@ -85,10 +90,8 @@ ___
 - [X] Build Message Handler (Twilio)
 
 ### Finalize Documentation/Artifacts and Present
-- [ ] Clean up Git Repo
-- [ ] Choose 3 submission categories
-- [ ] Submit to Devpost by 0930
-- [ ] Prep demo by 1030
+- [X] Submit to Devpost by 0930
+- [X] Prep demo by 1030
   
   
 <p align="center">
