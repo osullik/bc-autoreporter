@@ -10,9 +10,9 @@ class twillioConnector():
 	def __init__(self, index):
 
 		# Your Account SID from twilio.com/console
-		self.account_sid = "AC1b5439222dada3f7f8669e653d59e8cf"
+		#self.account_sid = "SID_here"
 		# Your Auth Token from twilio.com/console
-		self.auth_token  = "16675bff0d88de389706f072ac886649"
+		#self.auth_token  = "auth_tokenHere"
 
 
 		self.index = index
