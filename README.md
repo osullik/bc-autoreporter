@@ -39,15 +39,67 @@ The collection system begins with a user submitting a natural language observati
 
 ## The Parsing System
 The Parsing system aims to transform the unstructured observation into structured data. 
-The Parsing system begins with the execution of the Main.py script. The system connects to the Twilio API and retrieves any messages cached on the server. Those cached messages are passed to the parser which performs naive entity extraction (looking for the **@** tag and matching the following term to known entities within a similarity threshold of string matching distance < 3). It then extracts the tags prepended with a **#** and generates a sentiment score for the message. Finally, it extracts the words with the greatest influence on the sentiment score. 
+The Parsing system begins with the execution of the Main.py script. The system connects to the Twilio API and retrieves any messages cached on the server. Those cached messages are passed to the parser which performs naive entity extraction (looking for the **@** tag and matching the following term to known entities within a similarity threshold of string matching distance < 3). It then extracts the tags prepended with a **#** and generates a sentiment score for the message. It searches for dates using a set of rule-based and regex-based approaches, defualting to the current date if none are found. Finally, it extracts the words with the greatest influence on the sentiment score. 
 
-The Entities, Tags, Sentiment, Adjectives and the original observation are encoded in JSON. The schema of the JSON matches the schema of the Elastic Index described in the Storage System. 
+The Entities, Tags, Sentiment, Adjectives, dates and the original observation are encoded in JSON. We additionally encode the 'observer' (identity of the person who sent the message to twilio) and the date-time group of the update. The schema of the JSON matches the schema of the Elastic Index described in the Storage System. 
 
 The system ends when the JSON documents are completed and staged to be pushed to the database. 
 
 ## The Storage System
+The storage system aims to hold the collective observations of observers in both structured and unstructured format. The dual-storage allows for aggregation across subjects, reporters, themes and time, while retaining the ground-truth of the observation for reference. 
+
+The storage system begins with opening a connection to an AWS Opensearch index. The JSON document for each new observation is pushed into the index and assigned an automatically generated ID. The schema of the index is:
+
+    indexSchema = {				
+					  "settings": {
+					    "index": {
+					      "number_of_shards": 1,
+					      "number_of_replicas": 1
+					    }
+					  },
+					  "mappings": {
+						  "properties": {
+						    "adjectives": {
+						      "type": "keyword"
+						    },
+						    "date": {
+						      "type": "date"
+						    },
+						    "entity": {
+						      "type": "text"
+						    },
+						    "lastModified": {
+						      "type": "date"
+						    },
+						    "observation": {
+						      "type": "text"
+						    },
+						    "observer": {
+						      "type": "text"
+						    },
+						    "sentiment": {
+						      "type": "integer"
+						    },
+						    "tagList": {
+						      "type": "keyword"
+						    }
+						  }
+						}
+					}
+
+The storage system ends when all new observations are inserted to the database. 
 
 ## The Reporting System
+The reporting system aims to improve situational awareness of subjects, reporters and higher levels of management. 
+
+### Dashboards
+The reporting system begins by accessing the AWS Opensearch index through a Opensearch Dashboard (Similar to Kibana). The dashboards are configurable, but the default views we have built are an 'employee view' and a 'supervisor view'. An employee view shows an individual aggregated analysis of all observations made about them. It extacts trends in sentiment over time, commonly used words in the observations and highlights areas of relative strength and weakness. The supervisor view shows the aggregation of all their direct reports, like a 'health tracker' for the team. They can see who is performing well in what area, and also see if anyone is being 'gray', that is, they haven't been observed much. 
+The aim of these dashboards is to improve the timeliness and utility of observations by making them available to the people who need them as quickly as practicable. 
+
+### Report Generation
+At the end of a work year, or even quarterly most supervisors must generate formal reports to their employees outlining how they are performing against their goals and the expectations of the organization. The generation of these reports is typically labour intensive and results in either large amounts of time being taken from the manager's other responsibilities, or results in the use of generic templated responses that don't help anyone. We implement a text summarization model to collet all observations of an individual during the reporting period and output a succinct draft statement that the supervisor can use as the basis for their comments. Where reports are broken down by categories (e.g. organizational values) the manager simply filters by thosevalues in the database to summarize only the relevant observations. 
+
+The report generation system ends when the supervisors and employees have access to the information they need about their performance, when they need it to make for a more transparent and efficient working environment. 
 
 # Generating Synthetic Report Data
 As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. As a motivating use case, we used the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
