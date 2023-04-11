@@ -25,6 +25,22 @@ Out project explores an approach to performance appraisal that is participative,
 - NLP libraries: Hugging Face, NLTK, PyTorch
 - Chat-GPT
 
+# System Design
+Mr. FAT is discretized into four components. 
+1. The Collection subystem.
+2. The Parsing subsystem.
+3. The Storage subsystem
+4. The Reporting system. 
+
+## The Collection System
+The collection system aims to minimize the technical impediment to entry. The user interface requires no additional applications or web accesses to push observations into the system. We leverage [Twilio](twilio.com/)
+
+## The Parsing System
+
+## The Storage System
+
+## The Reporting System
+
 # Generating Synthetic Report Data
 As we didn't have access to real performance appraisal material we elected to generate some using chatGPT. As a motivating use case, we used the setting of the Nuclear Power Plant from 'the simpsons' to give the model extra context to draw on. The model was given variants on the following prompt to generate lists in the language of performance appraisal notes:
   
