@@ -51,41 +51,41 @@ The storage system aims to hold the collective observations of observers in both
 The storage system begins with opening a connection to an AWS Opensearch index. The JSON document for each new observation is pushed into the index and assigned an automatically generated ID. The schema of the index is:
 
     indexSchema = {				
-					  "settings": {
-					    "index": {
-					      "number_of_shards": 1,
-					      "number_of_replicas": 1
-					    }
-					  },
-					  "mappings": {
-						  "properties": {
-						    "adjectives": {
-						      "type": "keyword"
-						    },
-						    "date": {
-						      "type": "date"
-						    },
-						    "entity": {
-						      "type": "text"
-						    },
-						    "lastModified": {
-						      "type": "date"
-						    },
-						    "observation": {
-						      "type": "text"
-						    },
-						    "observer": {
-						      "type": "text"
-						    },
-						    "sentiment": {
-						      "type": "integer"
-						    },
-						    "tagList": {
-						      "type": "keyword"
-						    }
-						  }
-						}
+			"settings": {
+				"index": {
+					"number_of_shards": 1,
+					"number_of_replicas": 1
+					  }
+					},
+			"mappings": {
+				"properties": {
+					"adjectives": {
+						"type": "keyword"
+					},
+					"date": {
+						"type": "date"
+					},
+					"entity": {
+					  "type": "text"
+					},
+					"lastModified": {
+					  "type": "date"
+					},
+					"observation": {
+					  "type": "text"
+					},
+					"observer": {
+					  "type": "text"
+					},
+					"sentiment": {
+					  "type": "integer"
+					},
+					"tagList": {
+					  "type": "keyword"
 					}
+				}
+			}
+		}
 
 The storage system ends when all new observations are inserted to the database. 
 
