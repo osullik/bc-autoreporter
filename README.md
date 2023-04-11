@@ -39,7 +39,11 @@ The collection system begins with a user submitting a natural language observati
 
 ## The Parsing System
 The Parsing system aims to transform the unstructured observation into structured data. 
-The Parsing system begins with the execution of the Main.py script. The system connects to the Twilio API and retrieves any messages cached on the server. 
+The Parsing system begins with the execution of the Main.py script. The system connects to the Twilio API and retrieves any messages cached on the server. Those cached messages are passed to the parser which performs naive entity extraction (looking for the **@** tag and matching the following term to known entities within a similarity threshold of string matching distance < 3). It then extracts the tags prepended with a **#** and generates a sentiment score for the message. Finally, it extracts the words with the greatest influence on the sentiment score. 
+
+The Entities, Tags, Sentiment, Adjectives and the original observation are encoded in JSON. The schema of the JSON matches the schema of the Elastic Index described in the Storage System. 
+
+The system ends when the JSON documents are completed and staged to be pushed to the database. 
 
 ## The Storage System
 
