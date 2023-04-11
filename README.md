@@ -33,9 +33,13 @@ Mr. FAT is discretized into four components.
 4. The Reporting system. 
 
 ## The Collection System
-The collection system aims to minimize the technical impediment to entry. The user interface requires no additional applications or web accesses to push observations into the system. We leverage [Twilio](twilio.com/)
+The collection system aims to minimize the technical impediment to entry. The user interface requires no additional applications or web accesses to push observations into the system. We aim to move the burden of structuring the data from the user to the system, and employ a loosely structured natural language reminiscent of that used in many contemporary web applications, using the **@** symbol to denote entities and the **#** symbol to denote user tags. 
+
+The collection system begins with a user submitting a natural language observation to the system. The user can use an SMS or Whatsapp message to sent the observation to a designated phone number. The designated phone number is provided by [Twilio](twilio.com/). On receipt of the observation, the Twilio API sends an acknowledgement to the user, improving the user experience by 'closing the loop' on observation submission. The collection system end ends when the message is stored on the Twilio server. 
 
 ## The Parsing System
+The Parsing system aims to transform the unstructured observation into structured data. 
+The Parsing system begins with the execution of the Main.py script. The system connects to the Twilio API and retrieves any messages cached on the server. 
 
 ## The Storage System
 
