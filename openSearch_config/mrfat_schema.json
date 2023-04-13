@@ -1,0 +1,36 @@
+{				
+					  "settings": {
+					    "index": {
+					      "number_of_shards": 1,
+					      "number_of_replicas": 1
+					    }
+					  },
+					  "mappings": {
+						  "properties": {
+						    "adjectives": {
+						      "type": "keyword"
+						    },
+						    "date": {
+						      "type": "date"
+						    },
+						    "entity": {
+						      "type": "text"
+						    },
+						    "lastModified": {
+						      "type": "date"
+						    },
+						    "observation": {
+						      "type": "text"
+						    },
+						    "observer": {
+						      "type": "text"
+						    },
+						    "sentiment": {
+						      "type": "integer"
+						    },
+						    "tagList": {
+						      "type": "keyword"
+						    }
+						  }
+						}
+					}
