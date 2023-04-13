@@ -139,6 +139,9 @@ ___
 - [ ] Improve coherence of summaries
 	- [ ] Implement paragraph formalizer model. 
 ## Cleanup
+- [X] Structure in directories
+- [X] Refresh environment (delete unnessecary packages)
+- [X] Delete local files (e.g. log files etc)
 
 ## Refactoring
 
