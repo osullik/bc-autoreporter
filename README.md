@@ -133,6 +133,42 @@ The model condenses the entire collection of reports for each employee into a fe
 To further aid in understanding trends across reports, we used Python's [Natural Language Tool Kit NLTK](https://www.nltk.org/) to perform Part of Speech (POS) Tagging and Sentiment Analysis on the content of the reports. Linguistically, adjectives and adverbs are typically most indicative of the sentiment of a piece of text, so we exctracted those words from the reports and flagged them, creating an additional field in the ElasticSearch schema to allow for further analysis of sentiment trends via the Kibana dashboards. We also used [VADER (Valence Aware Dictionary and sEntiment Reasoner)](https://github.com/cjhutto/vaderSentiment),  an open-source lexicon and rule-based sentiment analysis tool, to compute overall sentiment scores for each report entered in the database.
 ___
 
+# Post Hackathon To-Do
+
+## Capabilities
+- [ ] Improve coherence of summaries
+	- [ ] Implement paragraph formalizer model. 
+## Cleanup
+- [X] Structure in directories
+- [X] Refresh environment (delete unnessecary packages)
+- [X] Delete local files (e.g. log files etc)
+
+## Refactoring
+
+### General
+- [ ] Remove hacky functions from class files. 
+- [ ] Split main into bulk and stream functions
+- [ ] Move all interaction with classes to main file
+
+### Main
+- [ ] Add Arg Parser
+- [ ] Support Bulk or Stream Mode
+
+### Tests
+- [ ] Add Tests for opensearch connection
+- [ ] Add tests for twillio connection
+- [ ] Add tests for bulk import
+- [ ] Add tests for stream import
+- [ ] Add tests for sentiment analysis
+- [ ] Add tests for summarization
+
+## Containerizing
+- [ ] Dockerize Collection Code
+- [ ] Dockerize Parser Code
+
+## Deployment
+___
+
 # Project Development Plan
 
 ### Data Collection
