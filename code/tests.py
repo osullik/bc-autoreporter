@@ -7,6 +7,7 @@ import os
 #Mr Fat imports
 from parser import logEntryParser
 from parser import inputHandler
+from main import CliHandler
 
 class testEntityExtraction(unittest.TestCase):
 	#Tests the entity extraction functions of the parser class. 
@@ -209,7 +210,59 @@ class testInputHandling(unittest.TestCase):
 
 #TODO: Implement tests for the opensearch connector
 
+#TODO: Impelement tests for the main function
 
+class testMainFunction(unittest.TestCase):
+	def testBulkImport(self):
+		print("bulk import test not implemented")
+
+	def testStreamConnection(self):
+		print("stream test not implemented")
+
+	def testoutputModes(self):
+		print("bulk import test not implemented")
+
+	def testNoInputs(self):
+		missingFileFlags = {"files":None, "mode":"b", "output":"json", "creds":["authKey", "secretKey"]}
+		missingFileError = ["Error: missing input file. Specify file with the -f or --file flags (e.g. -f inputfile.txt)"]
+
+		missingStreamFlags = {"files":None, "mode":"s", "output":"json", "creds":["authKey", "secretKey"]}
+		missingStreamError = ["Error: missing API credentials for stream. Specify with the -s or --stream flags (e.g. -s authkey secretkey)"]
+
+		superfluousFileFlags = {"files":["notneeded.txt"], "mode":"s", "output":"json", "creds":["authKey", "secretKey"]}
+		superfluousFileError = ["Warning: The files notneeded.txt will not be used outside of bulk import mode. Leave flag blank if not bulk importing"]
+
+		superfluousCredFlags = {"files":["needed.txt"], "mode":"b", "output":"json", "creds":["12345", "67890"]}
+		superfluousCredError = ["Warning: Streaming API credentials will not be used outside of streaming mode. Leave flag blank if not streaming"]
+
+		fileNameList = ["file1", "file2"]
+		bulkImportFlags = {"file":fileNameList, "mode":"b", "output":"json", "creds":["authKey", "secretKey"]}
+
+		CH = CliHandler(missingFileFlags)
+		self.assertEqual(CH.checkForErrors(), missingFileError)
+		
+		CH = CliHandler(missingStreamFlags)
+		self.assertEqual(CH.checkForErrors(), missingStreamError)
+
+		CH = CliHandler(superfluousFileFlags)
+		self.assertEqual(CH.checkForWarnings(), superfluousFileError)
+
+		CH = CliHandler(superfluousCredFlags)
+		self.assertEqual(CH.checkForWarnings(), superfluousCredError)		
+
+		CH = CliHandler(bulkImportFlags)
+		self.assertEqual(CH.generateInputTuples(fileNameList), [("file1","bulk_import"),("file2","bulk_import")])
+
+
+
+
+class testLoggingFunctions(unittest.TestCase):
+
+	def testLogFileUpdate(self):
+		print("Testing of Log File Updates not yet implemented")
+
+	def testStreamOutputLog(self):
+		print("Testing of stream output log not yet implemented")
 
 if __name__ == '__main__':
 	unittest.main()
