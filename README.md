@@ -147,12 +147,14 @@ ___
 
 ### General
 - [ ] Remove hacky functions from class files. 
-- [ ] Split main into bulk and stream functions
 - [ ] Move all interaction with classes to main file
 
 ### Main
-- [ ] Add Arg Parser
-- [ ] Support Bulk or Stream Mode
+- [X] Add Arg Parser
+- [ ] Split main into bulk and stream functions
+	- [X] Build out Bulk Import Workflow
+	- [ ] Build out Stream Workflow
+- [ ] Move summarizer to its own class / function / input arg
 
 ### Tests
 - [ ] Add Tests for opensearch connection
